@@ -13,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     EditText et1, et2;
     TextView tv1;
+    Exponent e= new Exponent();
+    Factorial f= new Factorial();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
         String value1 = et1.getText().toString();
         int n1, res = 1;
         n1 = Integer.parseInt(value1);
-        for (int i = 1; i <= n1; i++) {
-            res *= i;
-        }
+        res= f.factorial(n1);
         tv1.setText(n1+"! = "+res);
     }
 
@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
         double res = 1;
         n1 = Integer.parseInt(value1);
         n2 = Integer.parseInt(value2);
-        for (int i = 0; i < n2; i++) {
-            res *= n1;
-        }
+        res= e.exp(n1,n2);
         tv1.setText(n1+"^"+n2+" = "+res);
     }
 
@@ -124,10 +122,57 @@ public class MainActivity extends AppCompatActivity {
         tv1.setText(n3+" inverted is: "+nr);
     }
 
+    public void sqroot(View view){
+        et1 = (EditText) findViewById(R.id.et11);
+        tv1 = (TextView) findViewById(R.id.tv11);
+        String value1 = et1.getText().toString();
+        int n1;
+        double res = 0;
+        n1 = Integer.parseInt(value1);
+        res= Math.sqrt(n1);
+        tv1.setText("√"+n1+" = "+res);
+    }
     public void sen(View view){
+        EditText et1 = (EditText) findViewById(R.id.et11);
+        EditText et2 = (EditText) findViewById(R.id.et22);
+        TextView tv1 = (TextView) findViewById(R.id.tv11);
+        String valor1 = et1.getText().toString();
+        String valor2 = et2.getText().toString();
+        float n1, n2;
+        int z = 1;
+        n1 = Float.parseFloat(valor1);
+        n2 = Float.parseFloat(valor2);
 
+        double sum = 0;
+        for (int i = 1; i <= n2; i++) {
+            if (i % 2 == 0) {
+                sum = sum + ((e.exp(n1, z)) / f.factorial(z)) * -1;
+            } else {
+                sum = sum + (e.exp(n1, z)) / f.factorial(z);
+            }
+            z = z + 2;
+        }
+        tv1.setText("El seno de"+n1+" es: "+sum);
     }
     public void cos(View view){
-
+        EditText et1 = (EditText) findViewById(R.id.et11);
+        EditText et2 = (EditText) findViewById(R.id.et22);
+        TextView tv1 = (TextView) findViewById(R.id.tv11);
+        String valor1 = et1.getText().toString();
+        String valor2 = et2.getText().toString();
+        float n1, n2;
+        int z = 0;
+        n1 = Float.parseFloat(valor1);
+        n2 = Float.parseFloat(valor2);
+        double sum = 0;
+        for (int i = 1; i <= n2; i++) {
+            if (i % 2 == 0) {
+                sum = sum + ((e.exp(n1, z)) / f.factorial(z)) * -1;
+            } else {
+                sum = sum + (e.exp(n1, z)) / f.factorial(z);
+            }
+            z = z + 2;
+        }
+        tv1.setText("El coseno de "+n1+" es: " + sum);
     }
 }
